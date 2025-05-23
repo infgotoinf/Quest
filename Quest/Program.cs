@@ -1,24 +1,87 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 public class Choise
 {
     public int Id { get; set; }
-    public SortedDictionary<int, string> choises { get; set; }
+    public string Text { get; set; }
+    public int[] ChoisesId { get; set; }
+    public string[] ChoisesText { get; set; }
     public void PrintChoise()
     {
-        foreach (var choise in choises)
+        for (int i = 0; i < ChoisesId.Length; i++)
         {
-            Console.WriteLine($"{choise.Key}: {choise.Value} \n");
+            Console.WriteLine($"{ChoisesId[i]}: {ChoisesText[i]}");
         }
+    }
+}
+
+public class BasicChoise : Choise
+{
+    public int MakeBasicChoise(int choise)
+    {
+        return choise;
+    }
+}
+
+public class CoolChoise : Choise
+{
+    public int MakeCoolChoise(string choise)
+    {
+        return 1;
+    }
+}
+
+public class TimelimitedChoise : Choise
+{
+    public int MakeCoolTimeLimit(int choise)
+    {
+        return 1;
+    }
+}
+
+public class EndMessage : Choise
+{
+    public int EndId { get; set; }
+}
+
+public class MakeRandomChoise : Choise
+{
+    public int MakeCoolTimeLimit()
+    {
+        return 1;
+    }
+}
+
+
+
+public class StrangeChoise : Choise
+{
+    public int MakeStrangeChoise(string choise)
+    {
+        return 1;
     }
 }
 public class AppDbContext : DbContext
 {
-    public DbSet<Choise> Choises { get; set; }
+    public DbSet<Choise> DbChoises { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=1234");
+        // Use a dedicated database name instead of 'postgres'
+        optionsBuilder.UseNpgsql("Host=localhost;Database=QuestDB;Username=postgres;Password=1234");
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Choise>()
+            .Property(e => e.ChoisesId)
+            .HasColumnType("integer[]");
+
+        modelBuilder.Entity<Choise>()
+            .Property(e => e.ChoisesText)
+            .HasColumnType("text[]");
     }
 }
 
@@ -27,43 +90,58 @@ class Program2
     static void Main()
     {
         var context = new AppDbContext();
+
+        // Terminate active connections to QuestDB before deletion
+        using (var adminConn = new Npgsql.NpgsqlConnection("Host=localhost;Database=postgres;Username=postgres;Password=1234"))
+        {
+            adminConn.Open();
+            using (var cmd = new Npgsql.NpgsqlCommand(
+                $"SELECT pg_terminate_backend(pg_stat_activity.pid) " +
+                $"FROM pg_stat_activity " +
+                $"WHERE pg_stat_activity.datname = 'QuestDB' " +
+                $"AND pid <> pg_backend_pid();", adminConn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Now safely delete and recreate the database
+        context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
-        context.Choises.AddRange(
+        // Add sample data
+        context.DbChoises.AddRange(
             new Choise
             {
-                Id = 1,
-                Title = "Phython",
-                Author = "Bullied Nerd",
-                Genre = "Programming",
-                PublicationYear = 19999,
-                Pages = 2,
-                IsAvalible = false,
-                Rating = -228,
-                Description = "LEARN HOW TO SPEAAK PYTHON IN TWO DAYS",
-                Price = -1000
+                Id = 0,
+                Text = "Вы проспаетесь в автобусе, ваши действия:",
+                ChoisesId = new int[] { 1, 2, 3 },
+                ChoisesText = new string[]
+                {
+                    "Остановить автобус",
+                    "Заорать на весь автобус",
+                    "Продолжить спать"
+                }
             },
             new Choise
             {
-                Id = 2,
-                Title = "Gore & Flowers",
-                Author = "Lingus Dingus",
-                Genre = "Diary",
-                PublicationYear = 2025,
-                Pages = 4,
-                IsAvalible = true,
-                Rating = 99,
-                Description = "A short but cute story about Lingus Dingus playing with his friends :3 ... and their guts... UwU",
-                Price = 0
+                Id = 1,
+                Text = "Вы проспаетесь в автобусе, ваши действия:",
+                ChoisesId = new int[] { 1, 2, 3 },
+                ChoisesText = new string[]
+                {
+                    "Остановить автобус",
+                    "Заорать на весь автобус",
+                    "Продолжить спать"
+                }
             }
         );
-
         context.SaveChanges();
 
         Console.WriteLine("Хныки добавлены.\n");
 
-        Console.WriteLine("Все продукты:");
-        var choises = context.Choises.ToList();
+        Console.WriteLine("Все выборы:");
+        var choises = context.DbChoises.ToList();
 
         foreach (var b in choises)
         {
@@ -73,13 +151,13 @@ class Program2
 
         Console.WriteLine("\nОчистка таблицы:");
 
-        context.Choises.RemoveRange(context.Choises);
+        context.DbChoises.RemoveRange(context.DbChoises);
 
         context.SaveChanges();
 
         Console.WriteLine("Таблица очищена.");
 
-        choises = context.Choises.ToList();
+        choises = context.DbChoises.ToList();
         foreach (var b in choises)
         {
             b.PrintChoise();
