@@ -8,4 +8,5 @@
 ![Снимок экрана 2025-05-23 021606](https://github.com/user-attachments/assets/77d79c1b-5242-48d1-91b1-503a8fa49fae)
 
 Бд реализована в постграсе.
+
 ![Снимок экрана 2025-05-23 123021](https://github.com/user-attachments/assets/85146c83-7171-48f5-ba53-9ae17bcadbfd)
