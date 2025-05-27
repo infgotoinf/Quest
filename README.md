@@ -6,7 +6,7 @@
 ## БД
 Бд представляет из себя большую древавидную структуру выборов, вот пре-альфа-бета версия:
 
-![Снимок экрана 2025-05-23 021606](https://github.com/user-attachments/assets/77d79c1b-5242-48d1-91b1-503a8fa49fae)
+![image](https://github.com/user-attachments/assets/11ee4a31-f050-46b8-ac0a-ea540ff6c44a)
 
 Бд реализована в постграсе.
 
