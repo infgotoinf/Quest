@@ -8,6 +8,8 @@
 
 ![image](https://github.com/user-attachments/assets/11ee4a31-f050-46b8-ac0a-ea540ff6c44a)
 
-Бд реализована в постграсе.
+Бд реализована в постграсе:
 
 ![image](https://github.com/user-attachments/assets/995533f7-8bfe-4975-bd80-80b3fcfaab1f)
+
+Они выглядят одинаково, но у них разная реализация функций принта и у некоторых потом ещё поля добавятся.
