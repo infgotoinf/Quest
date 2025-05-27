@@ -10,4 +10,4 @@
 
 Бд реализована в постграсе.
 
-![Снимок экрана 2025-05-23 123021](https://github.com/user-attachments/assets/85146c83-7171-48f5-ba53-9ae17bcadbfd)
+![image](https://github.com/user-attachments/assets/995533f7-8bfe-4975-bd80-80b3fcfaab1f
