@@ -1,5 +1,4 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
 using Classes;
 using Bd;
 
@@ -7,30 +6,23 @@ class Program2
 {
     static void Main()
     {
-        var choise = choises[0].MakeChoise();
+        Database database = new Database();
+
+        database.CreateDb();
+
+        var choises = new List<Choise>();
+        choises.AddRange(database.context.DbBasicChoises.ToList());
+        choises.AddRange(database.context.DbCoolChoises.ToList());
+        choises.AddRange(database.context.DbTimelimitedChoises.ToList());
+        choises.AddRange(database.context.DbRandomChoises.ToList());
+        choises.AddRange(database.context.DbStrangeChoises.ToList());
+        choises.AddRange(database.context.DbEndMessages.ToList());
+
+        var choise = choises.First(c => c.Id == 0).MakeChoise();
 
         while (true)
         {
-            choise = choises[choise].MakeChoise();
-        }
-
-
-    Console.WriteLine("\nОчистка таблицы:");
-
-        context.DbBasicChoises      .RemoveRange(context.DbBasicChoises);
-        context.DbCoolChoises       .RemoveRange(context.DbCoolChoises);
-        context.DbTimelimitedChoises.RemoveRange(context.DbTimelimitedChoises);
-        context.DbRandomChoises     .RemoveRange(context.DbRandomChoises);
-        context.DbStrangeChoises    .RemoveRange(context.DbStrangeChoises);
-        context.DbEndMessages       .RemoveRange(context.DbEndMessages);
-
-        context.SaveChanges();
-
-        Console.WriteLine("Таблица очищена.");
-
-        foreach (var b in choises)
-        {
-            b.PrintChoise();
+            choise = choises.First(c => c.Id == choise).MakeChoise();
         }
     }
 }
