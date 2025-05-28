@@ -10,7 +10,7 @@
 
 Бд реализована в постграсе:
 
-![image](https://github.com/user-attachments/assets/995533f7-8bfe-4975-bd80-80b3fcfaab1f)
+![image](https://github.com/user-attachments/assets/1bc18c77-e775-459e-a71e-ae90d32b6232)
 
 Они выглядят одинаково, но у них разная реализация функций принта и у некоторых потом ещё поля добавятся.
 
