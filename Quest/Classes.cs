@@ -9,13 +9,6 @@ namespace Classes
         public string[] ChoisesText { get; set; }
 
         public abstract int MakeChoise();
-        public void PrintChoise()
-        {
-            for (int i = 0; i < ChoisesId.Length; i++)
-            {
-                Console.WriteLine($"{ChoisesId[i]}: {ChoisesText[i]}");
-            }
-        }
     }
 
     public class BasicChoise : Choise
@@ -59,21 +52,105 @@ namespace Classes
 
     public class CoolChoise : Choise
     {
-        // Спрашивает пользователя его выбор в виде строчки, при этом не показывая возможные варианты ответов X
+        // Спрашивает пользователя его выбор в виде строчки, при этом не показывая возможные варианты ответов V
         public override int MakeChoise()
         {
+            Console.WriteLine(Text);
+
             string choise = Console.ReadLine();
-            return 1;
+            int counter = 0;
+            foreach (string i in ChoisesText)
+            {
+                if (i == choise)
+                {
+                    Console.Clear();
+                    return ChoisesId[counter];
+                }
+                counter++;
+            }
+
+            Console.Clear();
+            return ChoisesId.Last();
         }
     }
 
     public class TimelimitedChoise : Choise
     {
-        // Спрашивает пользователя его выбор в виде числа но ограничивает время на выбор X
+        public int timeToChoose;
+        private bool timeExpired = false;
+
+        // Спрашивает пользователя его выбор в виде числа но ограничивает время на выбор V
         public override int MakeChoise()
         {
-            
-            return 1;
+            if (timeToChoose <= 0)
+                return ChoisesId.Last();
+
+            Console.Clear();
+            timeExpired = false;
+
+            Thread timerThread = new Thread(CountdownTimer);
+            timerThread.IsBackground = true;
+            timerThread.Start();
+
+            while (true)
+            {
+                Console.WriteLine($"{Text}\n");
+                Console.WriteLine($"Осталось времени: {timeToChoose} сек.");
+
+                int counter = 1;
+                foreach (string i in ChoisesText)
+                {
+                    Console.WriteLine($"    {counter++}) {i}");
+                }
+
+                if (timeExpired)
+                {
+                    Console.Clear();
+                    return ChoisesId.Last();
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    string answer = Console.ReadLine();
+
+                    if (!int.TryParse(answer, out int choice))
+                    {
+                        HandleInvalidInput();
+                        continue;
+                    }
+
+                    if (choice < 1 || choice >= counter)
+                    {
+                        HandleInvalidInput();
+                        continue;
+                    }
+
+                    timeExpired = true;
+                    Console.Clear();
+                    return ChoisesId[choice - 1];
+                }
+
+                Thread.Sleep(100);
+                Console.Clear();
+            }
+        }
+
+        private void CountdownTimer()
+        {
+            int timeLeft = timeToChoose;
+            while (timeLeft > 0 && !timeExpired)
+            {
+                Thread.Sleep(1000);
+                timeLeft--;
+                timeToChoose = timeLeft;
+            }
+            timeExpired = true;
+        }
+
+        private void HandleInvalidInput()
+        {
+            Console.WriteLine("Wrong Input!");
+            Thread.Sleep(1000);
         }
     }
 
