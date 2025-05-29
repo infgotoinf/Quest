@@ -95,7 +95,7 @@ namespace Classes
             while (true)
             {
                 Console.WriteLine($"{Text}\n");
-                Console.WriteLine($"Осталось времени: {timeToChoose} сек.");
+                Console.WriteLine($"Осталось времени: {timeToChoose}");
 
                 int counter = 1;
                 foreach (string i in ChoisesText)

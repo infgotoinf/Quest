@@ -16,7 +16,9 @@ namespace Bd
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Use a dedicated database name instead of 'postgres'
-            optionsBuilder.UseNpgsql("Host=localhost;Database=QuestDB;Username=postgres;Password=1234");
+            optionsBuilder
+                .UseNpgsql("Host=localhost;Database=QuestDB;Username=postgres;Password=1234")
+                .EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -710,9 +712,10 @@ namespace Bd
                     "прикольненькие и всё такое, но хз, бесят уже, что xml, что\n" +
                     "фронтенд, одно и то же всё копии копии копии...\n\n" +
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@@@@&&@@#&BBBB&B&@@#B@#@@@@@@@@@@@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@@@@?.&B B#^:##  GP  &.P@@@@@@@@@@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@@@@?.BP #@7~@& G.:G &.J&&@@@@@@@@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@@@@BG@@5&@BG@&5&&&&5&P55G@@@@@@@@@@@@@@@@@@@\r\n@@@@@@@@G??????????JJ??J??JJ??J????J?JJJJ??????????Y@@@@@@@@\r\n@@@@@@@@#7????????????????????JJJJJJJJJJJJJJJJJJ??7P@@@@@@@@\r\n@@@@@@@@&?????????????????????Y5555555555555555J??7B@@@@@@@@\r\n@@@@@@@@@?????????????????????Y5555555555555555J??7&@@@@@@@@\r\n@@@@@@@@@Y?????7G@@@@@@@@@@@@@@@@@@@@@@@@@@&Y5YJ???@@@@@@@@@\r\n@@@@@@@@@P?????7P@@@@@@@@@@@@@@@@@@@@@@@@@@&Y5Y???J@@@@@@@@@\r\n@@@@@@@@@B7?????Y@@@@@@&&&&&&&&&&&&&&&&&&&&GY5Y???5@@@@@@@@@\r\n@@@@@@@@@&7?????J@@@@@@?7?????YYYYYYYYYYYYYY55J??7G@@@@@@@@@\r\n@@@@@@@@@@???????&@@@@@J7?????YYYYYYYYYYYYY555J??7#@@@@@@@@@\r\n@@@@@@@@@@J?????7#@@@@@&&&&&&&&&&&&&&&&&&&#555J???&@@@@@@@@@\r\n@@@@@@@@@@5?????7G@@@@@@@@@@@@@@@@@@@@@@@@&Y5Y???J@@@@@@@@@@\r\n@@@@@@@@@@G7?????5@@@@@@@@@@@@@@@@@@@@@@@@#Y5Y???Y@@@@@@@@@@\r\n@@@@@@@@@@#7??????JJJJJ???????Y5555YB@@@@@GY5Y??7P@@@@@@@@@@\r\n@@@@@@@@@@&???????&@@@@&??????Y5YYYY#@@@@@PY5J??7B@@@@@@@@@@\r\n@@@@@@@@@@@J?????7&@@@@@J7777?YYYYYY&@@@@@5Y5J???&@@@@@@@@@@\r\n@@@@@@@@@@@Y?????7B@@@@@@&#GP5PGB#&@@@@@@&Y5Y????@@@@@@@@@@@\r\n@@@@@@@@@@@P7?????P@@@@@@@@@@@@@@@@@@@@@@#Y5Y???J@@@@@@@@@@@\r\n@@@@@@@@@@@B7??????Y5GB#&@@@@@@@@@@@&#BGP5Y5Y???5@@@@@@@@@@@\r\n@@@@@@@@@@@&7????????777??JYPGBBGP5YYYYYY555J??7G@@@@@@@@@@@\r\n@@@@@@@@@@@@??????????????????YYY55555YYYYYJ???7#@@@@@@@@@@@\r\n@@@@@@@@@@@@G5YJ??77??????????YYYYYJJ???777??J5P@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@&&#GP5JJ?????????????JYPGB&&@@@@@@@@@@@@@@@@\r\n@@@@@@@@@@@@@@@@@@@@@@@@&#BPYJJYPG#&@@@@@@@@@@@@@@@@@@@@@@@@",
-                    ChoisesId = new int[] {},
+                    ChoisesId = new int[] { 42 },
                     ChoisesText = new string[]
                     {
+                        "Перейти на ImGui"
                     }
                 }
             ); context.DbBasicChoises.AddRange(
@@ -735,7 +738,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 43,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -746,7 +749,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 44,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -757,7 +760,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 45,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -768,7 +771,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 46,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -779,7 +782,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 47,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -790,7 +793,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 48,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -801,7 +804,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
+                    Id = 49,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
@@ -812,51 +815,7 @@ namespace Bd
             ); context.DbBasicChoises.AddRange(
                 new BasicChoise
                 {
-                    Id = 40,
-                    Text =
-                    "   ",
-                    ChoisesId = new int[] { },
-                    ChoisesText = new string[]
-                    {
-                    }
-                }
-            ); context.DbBasicChoises.AddRange(
-                new BasicChoise
-                {
-                    Id = 40,
-                    Text =
-                    "   ",
-                    ChoisesId = new int[] { },
-                    ChoisesText = new string[]
-                    {
-                    }
-                }
-            ); context.DbBasicChoises.AddRange(
-                new BasicChoise
-                {
-                    Id = 40,
-                    Text =
-                    "   ",
-                    ChoisesId = new int[] { },
-                    ChoisesText = new string[]
-                    {
-                    }
-                }
-            ); context.DbBasicChoises.AddRange(
-                new BasicChoise
-                {
-                    Id = 40,
-                    Text =
-                    "   ",
-                    ChoisesId = new int[] { },
-                    ChoisesText = new string[]
-                    {
-                    }
-                }
-            ); context.DbBasicChoises.AddRange(
-                new BasicChoise
-                {
-                    Id = 40,
+                    Id = 50,
                     Text =
                     "   ",
                     ChoisesId = new int[] { },
