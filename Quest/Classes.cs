@@ -130,7 +130,7 @@ namespace Classes
                     return ChoisesId[choice - 1];
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(1);
                 Console.Clear();
             }
         }
@@ -140,7 +140,7 @@ namespace Classes
             int timeLeft = timeToChoose;
             while (timeLeft > 0 && !timeExpired)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(1);
                 timeLeft--;
                 timeToChoose = timeLeft;
             }
