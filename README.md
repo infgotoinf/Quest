@@ -4,7 +4,7 @@ Quest! - это игра-квест написанная на C# с исполь
 ## Диаграммы
 Диаграмма классов:
 
-![Снимок экрана 2025-05-23 082430](https://github.com/user-attachments/assets/8fc5eb97-4b4f-4aaf-8445-12e43fc2fb88)
+![image](https://github.com/user-attachments/assets/0f6822f8-6af2-4136-83a2-bf9cf0da4392)
 
 Диаграмма последовательности:
 
