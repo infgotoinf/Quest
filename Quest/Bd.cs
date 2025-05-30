@@ -135,10 +135,12 @@ namespace Bd
                 new BasicChoise
                 {
                     Id = 5,
-                    Text = "",
-                    ChoisesId = new int[] { },
+                    Text =
+                    "   Лобовое стекло настолько красивое, что его ломать не хочется",
+                    ChoisesId = new int[] {4},
                     ChoisesText = new string[]
                     {
+                        "Сесть за место водителя"
                     }
                 }
             ); context.DbEndMessages.AddRange(
@@ -178,10 +180,13 @@ namespace Bd
                 new BasicChoise
                 {
                     Id = 8,
-                    Text = "",
-                    ChoisesId = new int[] { },
+                    Text = 
+                    " Вы собираетесь свернуть вниз, но путаете вниз и верх, и\n" +
+                    "поэтому едите вверх.",
+                    ChoisesId = new int[] {7},
                     ChoisesText = new string[]
                     {
+                        "Поезать вверх"
                     }
                 }
             ); context.DbBasicChoises.AddRange(
@@ -208,10 +213,12 @@ namespace Bd
                 new BasicChoise
                 {
                     Id = 11,
-                    Text = "",
-                    ChoisesId = new int[] { },
+                    Text =
+                    "   Вы собираетесь повернуться на 45 градусов, но передумываете.",
+                    ChoisesId = new int[] {9},
                     ChoisesText = new string[]
                     {
+                        "Выпрыгнуть из автобуса"
                     }
                 }
             ); context.DbBasicChoises.AddRange(

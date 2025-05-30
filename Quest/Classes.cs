@@ -218,7 +218,7 @@ namespace Classes
         // Выводит пользователю сообщение и за тем перекидывает в начало игры V
         public override int MakeChoise()
         {
-            Console.WriteLine($"Концовка {EndId}");
+            Console.WriteLine($"Концовка {EndId} из 15");
             Console.WriteLine(Text);
             Console.ReadKey();
             Console.Clear();
