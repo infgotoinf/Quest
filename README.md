@@ -16,7 +16,7 @@ Quest! - это игра-квест написанная на C# с исполь
 ## БД
 Бд представляет из себя большую древавидную структуру выборов. Вот так она выглядит в Obsidian:
 
-![image](https://github.com/user-attachments/assets/11ee4a31-f050-46b8-ac0a-ea540ff6c44a)
+![image](https://github.com/user-attachments/assets/7508903b-c945-430d-9e71-37d90a8d5bed)
 
 Вот реализация классов БД в Postgress:
 
